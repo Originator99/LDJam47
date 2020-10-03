@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour {
         if(hitInfo.collider != null) {
             Debug.Log("Bullet hit : " + hitInfo.collider.name);
             if(hitInfo.collider.tag != "Player") {
+                if(hitInfo.collider.tag.Contains("destructible")) {
+                    GameEventSystem.RaiseGameEvent(GAME_EVENT.PLATFORM_DESTROYED, hitInfo.collider.transform);
+                }
                 DestroyProjectile();
             }
         }

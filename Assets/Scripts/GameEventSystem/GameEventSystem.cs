@@ -1,0 +1,12 @@
+﻿public class GameEventSystem {
+    public delegate void EventRaised(GAME_EVENT type, System.Object data);
+    public static event EventRaised GameEventHandler;
+    public static void RaiseGameEvent(GAME_EVENT type, System.Object data = null) {
+        GameEventHandler?.Invoke(type, data);
+    }
+}
+
+public enum GAME_EVENT {
+    PLATFORM_DESTROYED,
+    REST_LEVEL
+}
