@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour {
 
     [SerializeField]
     string recocheLayer;
+    [SerializeField]
+    string enemyShieldRecocheLayer;
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class Projectile : MonoBehaviour {
         {
             Debug.Log("Bullet hit : " + hitInfo.collider.name);
             if(hitInfo.collider != null && hitInfo.collider.tag != "Player") {
-                if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(recocheLayer)) { //Recoche logic
+                if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(recocheLayer) || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(enemyShieldRecocheLayer)) { //Recoche logic
                     Vector2 reflectDir = Vector2.Reflect(transform.right, hitInfo.normal);
                     float rot = Mathf.Atan2(reflectDir.y, reflectDir.x) * Mathf.Rad2Deg;
                     transform.eulerAngles = new Vector3(0, 0, rot);
