@@ -7,6 +7,9 @@
 }
 
 public enum GAME_EVENT {
+    LEVEL_START,
     PLATFORM_DESTROYED,
-    REST_LEVEL
+    OBSTACLE_DESTROYED,
+    REST_LEVEL,
+    LEVEL_END
 }
