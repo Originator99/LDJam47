@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7405290837456241578}
   - component: {fileID: 7405290837456241577}
   - component: {fileID: 7405290837456241576}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7405290837472749366}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7405290837937295471}
   - component: {fileID: 7405290837937295474}
   - component: {fileID: 7405290837937295470}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9bb9c228a50222b46881862b72e86270, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 978dd8e02e1debb4eb6f572aeaedd1d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -230,18 +230,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 0.08, y: 0.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.44, y: 2.68}
   m_EdgeRadius: 0
 --- !u!50 &7405290837937295473
 Rigidbody2D:
@@ -297,7 +297,7 @@ MonoBehaviour:
   _skinWidth: 0.02
   platformMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 2305
   triggerMask:
     serializedVersion: 2
     m_Bits: 769
