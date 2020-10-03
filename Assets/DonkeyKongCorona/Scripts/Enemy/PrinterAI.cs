@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerController2D;
 
 public class PrinterAI : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class PrinterAI : MonoBehaviour
 
         StartCoroutine(MoveRight());
         StartCoroutine(DetectPlayer());
+        StartCoroutine(DetectGround());
 
         StartCoroutine(StartFiring());
     }
@@ -148,6 +150,49 @@ public class PrinterAI : MonoBehaviour
     float rotateRay = 30;
 
     IEnumerator DetectPlayer()
+    {
+        while (true)
+        {
+            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right * -1, 10, playerLayerMask);
+            if (hitInfo.collider != null)  //error
+            {
+                if (hitInfo.collider.CompareTag("Wall"))
+                {
+                    PlayerNotDetected();
+                }
+                else if (hitInfo.collider.CompareTag("Player"))
+                {
+                    Debug.DrawLine(transform.position, hitInfo.point, Color.yellow);
+                    if (!sittingIdle)
+                    {
+                        GetComponent<Animator>().SetBool("Idle", true);
+                        sittingIdle = true;
+                    }
+                    player = hitInfo.collider.gameObject;
+                    startFiring = true;
+                }
+                else if (hitInfo.collider.CompareTag("DiscoBall"))
+                {
+                    Debug.DrawLine(transform.position, hitInfo.point, Color.yellow);
+                    if (!sittingIdle)
+                    {
+                        GetComponent<Animator>().SetBool("Idle", true);
+                        sittingIdle = true;
+                    }
+                    player = hitInfo.collider.gameObject;
+                    startFiring = true;
+                }
+            }
+            else
+            {
+                PlayerNotDetected();
+            }
+
+            yield return null;
+        }
+    }
+
+    IEnumerator DetectGround()
     {
         while (true)
         {
