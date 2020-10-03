@@ -99,6 +99,9 @@ MonoBehaviour:
   lifeTime: 10
   destroyEffect: {fileID: 5186525339951229035, guid: e0cb9dd0192f61945b7df74f2aec8d33,
     type: 3}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &4045314020600710702
 MonoBehaviour:
   m_ObjectHideFlags: 0
