@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    private static GameManager instance;
+
     private void Awake() {
+        if(instance != null) {
+            Debug.LogError("More than one instance of game manager");
+            Destroy(gameObject);
+        } else {
+            instance = this;
+        }
         GameEventSystem.GameEventHandler += HandleGameEvents;
     }
 
