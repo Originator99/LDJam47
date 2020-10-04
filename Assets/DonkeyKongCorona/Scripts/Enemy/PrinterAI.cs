@@ -33,8 +33,16 @@ public class PrinterAI : MonoBehaviour
 
     bool startFiring = false;
 
+    public Vector3 Velocity;
+    public Rigidbody2D rb2d;
+    public bool IsAlive = true;
+    private double _decelerationTolerance = 12.0;
+
+
     private void Start()
     {
+        rb2d = GetComponent<Rigidbody2D>();
+
         Physics2D.queriesStartInColliders = false;
         bulletsInScene = new List<GameObject>();
 
@@ -50,6 +58,15 @@ public class PrinterAI : MonoBehaviour
         StartCoroutine(DetectGround());
 
         StartCoroutine(StartFiring());
+    }
+
+    void FixedUpdate()
+    {
+        if (IsAlive)
+        {
+            IsAlive = Vector3.Distance(rb2d.velocity, Velocity) < _decelerationTolerance;
+            Velocity = rb2d.velocity;
+        }
     }
 
     int count = 3;
