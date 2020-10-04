@@ -13,3 +13,9 @@ public enum GAME_EVENT {
     REST_LEVEL,
     LEVEL_END
 }
+
+public enum LEVEL_END_REASON {
+    TIMER_EXPIRED,
+    OBJECTIVE_COLLECTED,
+    PLAYER_DEAD
+}
