@@ -9,8 +9,6 @@ public class LevelController : MonoBehaviour {
 
     public LevelSO currentLevelSO;
 
-
-
     private void Awake() {
         if(instance != null) {
             Destroy(gameObject);
@@ -81,4 +79,15 @@ public class LevelController : MonoBehaviour {
             Debug.LogWarning("Trying to switch level where player is already on!");
         }
     }
+
+    #region Diamond / Objective Controls
+    [Header("Diamond Variables")]
+    public GameObject diamondPrefab;
+    public int minPlatformsToDestroy, maxPlatformsToDestroy;
+    public int minObstaclesToDestroy, maxObstaclesToDestroy;
+    public int minEnemiesToKill, maxEnemiesToKill;
+
+    private float platforms, obstacles, enemies;
+
+    #endregion
 }

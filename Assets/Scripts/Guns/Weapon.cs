@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour {
 
     private void Update() {
         if(Input.GetKeyDown(KeyCode.LeftArrow)) {
-            minRotClamp = 0f;
+            minRotClamp = 0;
             maxRotClamp = 180;
             facingDirection = -1;
         } else if(Input.GetKeyDown(KeyCode.RightArrow)) {

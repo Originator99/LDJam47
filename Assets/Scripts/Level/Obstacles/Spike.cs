@@ -9,8 +9,10 @@ public class Spike : MonoBehaviour {
 
     private const string PLATFORM_TAG = "destructible";
     private bool eventSent;
+    private bool onGround;
 
     private void Start() {
+        onGround = false;
         eventSent = false;
         rb.isKinematic = true;
     }
@@ -21,25 +23,26 @@ public class Spike : MonoBehaviour {
         if(platformRayHitCheck.collider != null && platformRayHitCheck.collider.tag.Contains(PLATFORM_TAG)) {
             rb.isKinematic = true;
             eventSent = false;
+            onGround = false;
         } else {
             if(!eventSent) {
                 eventSent = true;
                 GameEventSystem.RaiseGameEvent(GAME_EVENT.OBSTACLE_DESTROYED, transform);
                 rb.isKinematic = false;
             }
-            platformRayHitCheck = Physics2D.Raycast(attachPoint.position, Vector2.down, 1f, groundLayerMask);
-            if(platformRayHitCheck.collider != null) {
-                OnSpikeTouchedTheGround();
-            }
         }
     }
 
-    private void OnSpikeTouchedTheGround() {
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision) {
-
+        if(!onGround) {
+            if(collision.gameObject != null && collision.gameObject.CompareTag("Player")) {
+                Debug.Log("Player dead");
+                GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, LEVEL_END_REASON.PLAYER_DEAD);
+            }
+        }
+        if(collision.gameObject != null && collision.gameObject.layer == 8) {
+            onGround = true;
+        }
     }
 
 }
