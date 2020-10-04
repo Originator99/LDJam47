@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour {
         }
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotz = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+        transform.rotation = Quaternion.Euler(0f, 0f, /*Mathf.Clamp(*/rotz + offset/*, minRotClamp, maxRotClamp)*/);
 
         if(timeBtwShots <= 0) {
             if(Input.GetMouseButtonDown(0)) {
