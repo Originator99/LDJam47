@@ -43,8 +43,8 @@ public static class Loader {
 public enum SceneName {
     Loader,
     MainScene,
-    LEVEL_1,
-    LEVEL_2,
-    LEVEL_3,
-    LEVEL_4,
+    LEVEL_1_1,
+    LEVEL_1_2,
+    LEVEL_1_3,
+    LEVEL_1_4,
 }

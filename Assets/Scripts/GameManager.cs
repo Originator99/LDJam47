@@ -12,12 +12,12 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         } else {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         GameEventSystem.GameEventHandler += HandleGameEvents;
     }
 
     private void Start() {
-        GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START, 120);
     }
 
     private void OnDestroy() {
