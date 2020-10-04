@@ -18,6 +18,9 @@ public class PrinterAI : MonoBehaviour
 
     [SerializeField]
     LayerMask playerLayerMask;
+    
+    [SerializeField]
+    LayerMask groundLayerMask;
 
     bool sittingIdle = false;
 
@@ -33,15 +36,8 @@ public class PrinterAI : MonoBehaviour
 
     bool startFiring = false;
 
-    public Vector3 Velocity;
-    public Rigidbody2D rb2d;
-    public bool IsAlive = true;
-    private double _decelerationTolerance = 12.0;
-
-
     private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
 
         Physics2D.queriesStartInColliders = false;
         bulletsInScene = new List<GameObject>();
@@ -58,15 +54,6 @@ public class PrinterAI : MonoBehaviour
         StartCoroutine(DetectGround());
 
         StartCoroutine(StartFiring());
-    }
-
-    void FixedUpdate()
-    {
-        if (IsAlive)
-        {
-            IsAlive = Vector3.Distance(rb2d.velocity, Velocity) < _decelerationTolerance;
-            Velocity = rb2d.velocity;
-        }
     }
 
     int count = 3;
@@ -209,45 +196,32 @@ public class PrinterAI : MonoBehaviour
         }
     }
 
+    bool airTravel = false;
+
     IEnumerator DetectGround()
     {
         while (true)
         {
-            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right * -1, 10, playerLayerMask);
+            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up * -1, 1, layerMask);
             if (hitInfo.collider != null)  //error
             {
+                Debug.DrawLine(transform.position, hitInfo.point, Color.green);
                 if (hitInfo.collider.CompareTag("Wall"))
                 {
-                    PlayerNotDetected();
-                }
-                else if (hitInfo.collider.CompareTag("Player"))
-                {
-                    Debug.DrawLine(transform.position, hitInfo.point, Color.yellow);
-                    if (!sittingIdle)
+                    if (airTravel)
                     {
-                        GetComponent<Animator>().SetBool("Idle", true);
-                        sittingIdle = true;
+                        gameObject.SetActive(false);
                     }
-                    player = hitInfo.collider.gameObject;
-                    startFiring = true;
-                }
-                else if (hitInfo.collider.CompareTag("DiscoBall"))
-                {
-                    Debug.DrawLine(transform.position, hitInfo.point, Color.yellow);
-                    if (!sittingIdle)
+                    else
                     {
-                        GetComponent<Animator>().SetBool("Idle", true);
-                        sittingIdle = true;
+
                     }
-                    player = hitInfo.collider.gameObject;
-                    startFiring = true;
                 }
             }
             else
             {
-                PlayerNotDetected();
+                airTravel = true;
             }
-
             yield return null;
         }
     }

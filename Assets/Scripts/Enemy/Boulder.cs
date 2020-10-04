@@ -40,6 +40,7 @@ public class Boulder : MonoBehaviour
     {
         GameObject boulderClone = (GameObject)Instantiate(boulderRef);
         boulderClone.transform.position = startPos;
+        Destroy(this);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

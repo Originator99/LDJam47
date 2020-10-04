@@ -396,9 +396,9 @@ GameObject:
   - component: {fileID: 942238429}
   - component: {fileID: 942238428}
   - component: {fileID: 942238427}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformBig
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,7 +413,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -487,7 +487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942238426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.69, y: -11.42, z: 0}
+  m_LocalPosition: {x: -1.14, y: -5.95, z: 0}
   m_LocalScale: {x: 10, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -573,7 +573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996202858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16.02, y: -4.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -595,7 +595,7 @@ MonoBehaviour:
   _skinWidth: 0.02
   platformMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   triggerMask:
     serializedVersion: 2
     m_Bits: 769
@@ -733,9 +733,9 @@ GameObject:
   - component: {fileID: 1294715828}
   - component: {fileID: 1294715827}
   - component: {fileID: 1294715829}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platf
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -842,6 +842,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrinterIdle1
       objectReference: {fileID: 0}
+    - target: {fileID: 8397557404576499148, guid: be575e3fd724c3b46b0c8c8c7f3df2a9,
+        type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 8397557404576499149, guid: be575e3fd724c3b46b0c8c8c7f3df2a9,
         type: 3}
       propertyPath: m_IsTrigger
@@ -850,12 +855,12 @@ PrefabInstance:
     - target: {fileID: 8397557404576499151, guid: be575e3fd724c3b46b0c8c8c7f3df2a9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.76
+      value: 2.82
       objectReference: {fileID: 0}
     - target: {fileID: 8397557404576499151, guid: be575e3fd724c3b46b0c8c8c7f3df2a9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.96
+      value: -5.15
       objectReference: {fileID: 0}
     - target: {fileID: 8397557404576499151, guid: be575e3fd724c3b46b0c8c8c7f3df2a9,
         type: 3}
