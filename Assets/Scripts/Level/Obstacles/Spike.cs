@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour {
     public Rigidbody2D rb;
+    public BoxCollider2D collider;
     public Transform attachPoint;
     public LayerMask groundLayerMask;
 
@@ -15,6 +16,7 @@ public class Spike : MonoBehaviour {
         onGround = false;
         eventSent = false;
         rb.isKinematic = true;
+        collider.isTrigger = true;
     }
 
     private void Update() {
@@ -29,20 +31,22 @@ public class Spike : MonoBehaviour {
                 eventSent = true;
                 GameEventSystem.RaiseGameEvent(GAME_EVENT.OBSTACLE_DESTROYED, transform);
                 rb.isKinematic = false;
+                collider.isTrigger = false;
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+
+    private void OnTriggerEnter2D(Collider2D collision) {
         if(!onGround) {
             if(collision.gameObject != null && collision.gameObject.CompareTag("Player")) {
                 Debug.Log("Player dead");
                 GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, LEVEL_END_REASON.PLAYER_DEAD);
             }
         }
+
         if(collision.gameObject != null && collision.gameObject.layer == 8) {
             onGround = true;
         }
     }
-
 }
