@@ -4074,11 +4074,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 995ade26a25bc9946a04e7449a9cf33f, type: 2}
   - {fileID: 11400000, guid: aec0f5017281d164da32e9588bd6f029, type: 2}
   currentLevelSO: {fileID: 0}
-  diamondPrefab: {fileID: 0}
-  minPlatformsToDestroy: 0
-  maxPlatformsToDestroy: 0
-  minObstaclesToDestroy: 0
-  maxObstaclesToDestroy: 0
+  diamondPrefab: {fileID: 3532103352582636323, guid: e4a8a799bdaeaee4caa28dde3631d738,
+    type: 3}
+  minPlatformsToDestroy: 20
+  maxPlatformsToDestroy: 25
+  minObstaclesToDestroy: 1
+  maxObstaclesToDestroy: 1
   minEnemiesToKill: 0
   maxEnemiesToKill: 0
 --- !u!4 &940571919

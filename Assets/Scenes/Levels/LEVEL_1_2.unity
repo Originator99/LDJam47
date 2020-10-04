@@ -1514,6 +1514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 269696750}
+  collider: {fileID: 269696749}
   attachPoint: {fileID: 530916876}
   groundLayerMask:
     serializedVersion: 2
@@ -3384,7 +3385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &669764417
 GameObject:
@@ -3923,7 +3924,7 @@ RectTransform:
   m_Children:
   - {fileID: 1512818801}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4038,62 +4039,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &940571917
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 940571919}
-  - component: {fileID: 940571918}
-  m_Layer: 0
-  m_Name: LevelController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &940571918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940571917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db564c1cbbcf6e643aa2390142cf5e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelData:
-  - {fileID: 11400000, guid: e4e5267884aa9dc40a3f1e478d3967bc, type: 2}
-  - {fileID: 11400000, guid: 7206aedbc6318054091b5719b72629e0, type: 2}
-  - {fileID: 11400000, guid: 995ade26a25bc9946a04e7449a9cf33f, type: 2}
-  - {fileID: 11400000, guid: aec0f5017281d164da32e9588bd6f029, type: 2}
-  currentLevelSO: {fileID: 0}
-  diamondPrefab: {fileID: 0}
-  minPlatformsToDestroy: 0
-  maxPlatformsToDestroy: 0
-  minObstaclesToDestroy: 0
-  maxObstaclesToDestroy: 0
-  minEnemiesToKill: 0
-  maxEnemiesToKill: 0
---- !u!4 &940571919
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940571917}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.836772, y: 0.30293706, z: -1.4934655}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942238426
 GameObject:
   m_ObjectHideFlags: 0
@@ -7891,7 +7836,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1687258586
 MonoBehaviour:
@@ -8420,7 +8365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1804443625
 GameObject:
@@ -8528,7 +8473,7 @@ Transform:
   m_LocalScale: {x: 10, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1808018528
 GameObject:
@@ -9711,7 +9656,7 @@ Transform:
   - {fileID: 269696748}
   - {fileID: 207153464}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2010815914
 MonoBehaviour:
@@ -10325,7 +10270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 130, z: 90}
 --- !u!1001 &7405290837016693023
 PrefabInstance:
@@ -10382,7 +10327,7 @@ PrefabInstance:
     - target: {fileID: 7405290837937295475, guid: 5c8c45ff723ad784fb3cb2c35766d5bf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7405290837937295475, guid: 5c8c45ff723ad784fb3cb2c35766d5bf,
         type: 3}

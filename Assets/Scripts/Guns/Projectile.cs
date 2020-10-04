@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, 0.25f);
         if (hitInfo.collider != null)
         {
-            Debug.Log("Bullet hit : " + hitInfo.collider.name);
             if(hitInfo.collider != null && hitInfo.collider.tag != "Player") {
                 if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(recocheLayer) || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(enemyShieldRecocheLayer)) { //Recoche logic
                     Vector2 reflectDir = Vector2.Reflect(transform.right, hitInfo.normal);

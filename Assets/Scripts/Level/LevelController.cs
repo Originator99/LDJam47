@@ -19,7 +19,7 @@ public class LevelController : MonoBehaviour {
             SceneManager.sceneLoaded += HandleSceneLoad;
             GameEventSystem.GameEventHandler += HandleGameEvents;
             currentLevelSO = null;
-
+            GenerateDiamond();
             StartLevel();
         }
     }
@@ -41,7 +41,15 @@ public class LevelController : MonoBehaviour {
     }
 
     private void HandleGameEvents(GAME_EVENT type, System.Object data = null) {
-        
+        if(type == GAME_EVENT.PLATFORM_DESTROYED) {
+            OnPlatformDestroyed(data as Transform);
+        }
+        if(type == GAME_EVENT.OBSTACLE_DESTROYED) {
+            OnObstacleDestroyed(data as Transform);
+        }
+        if(type == GAME_EVENT.ENEMY_KILLED) {
+            OnEnemyKilled(data as Transform);
+        }
     }
 
     private void StartLevel() {
@@ -88,6 +96,52 @@ public class LevelController : MonoBehaviour {
     public int minEnemiesToKill, maxEnemiesToKill;
 
     private float platforms, obstacles, enemies;
+    private float currentPlatforms, currentObstacles, currentEnemies;
+
+    private string sceneToPutDiamond;
+    private bool diamondInstantiated;
+
+    private void GenerateDiamond() {
+        diamondInstantiated = false;
+        platforms = Random.Range(minPlatformsToDestroy, maxPlatformsToDestroy);
+        obstacles = Random.Range(minObstaclesToDestroy, maxObstaclesToDestroy);
+        enemies = Random.Range(minEnemiesToKill, maxEnemiesToKill);
+
+        currentPlatforms = 0;
+        currentObstacles = 0;
+        currentEnemies = 0;
+
+        int n = Random.Range(0, levelData.Count);
+        sceneToPutDiamond = levelData[n].ID.ToString();
+
+        Debug.Log("platforms : " + platforms + " obstacles : " + obstacles + " enemies : " + enemies + " scene : " + sceneToPutDiamond);
+    }
+
+    private void OnPlatformDestroyed(Transform obj) {
+        if(currentPlatforms < platforms) {
+            currentPlatforms++;
+        }
+        UpdateForDiamond(obj);
+    }
+    private void OnObstacleDestroyed(Transform obj) {
+        if(currentObstacles < obstacles) {
+            currentObstacles++;
+        }
+        UpdateForDiamond(obj);
+    }
+    private void OnEnemyKilled(Transform obj) {
+        if(currentEnemies < enemies) {
+            currentEnemies++;
+        }
+        UpdateForDiamond(obj);
+    }
+
+    private void UpdateForDiamond(Transform obj) {
+        if(currentEnemies == enemies && currentObstacles == obstacles && currentPlatforms == platforms && SceneManager.GetActiveScene().name == sceneToPutDiamond && !diamondInstantiated) {
+            diamondInstantiated = true;
+            Instantiate(diamondPrefab, obj.position, Quaternion.identity);
+        }
+    }
 
     #endregion
 }
