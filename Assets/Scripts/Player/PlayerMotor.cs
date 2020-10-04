@@ -60,36 +60,56 @@ public class PlayerMotor : MonoBehaviour {
 
 	#endregion
 
+	[SerializeField]
+	bool moveRight = true;
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
-	void Update() {
-		if(_controller.isGrounded)
+	void Update()
+	{
+		if (_controller.isGrounded)
 			_velocity.y = 0;
 
-		if(Input.GetKey(KeyCode.RightArrow)) {
+		if (Input.GetKey(KeyCode.RightArrow))
+		{
 			normalizedHorizontalSpeed = 1;
-			if(transform.localScale.x < 0f)
-				transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			//if(transform.localScale.x < 0f)
+			//	transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			if (moveRight == true)
+			{
+				transform.eulerAngles = new Vector3(0, 0, 0);
+				moveRight = false;
+			}
 
-            if(_controller.isGrounded)
-                _animator.Play(Animator.StringToHash("Run"));
-        } else if(Input.GetKey(KeyCode.LeftArrow)) {
+			if (_controller.isGrounded)
+				_animator.Play(Animator.StringToHash("Run"));
+		}
+		else if (Input.GetKey(KeyCode.LeftArrow))
+		{
+			moveRight = false;
 			normalizedHorizontalSpeed = -1;
-			if(transform.localScale.x > 0f)
-				transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            //if (transform.localScale.x > 0f)
+            //	transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            if (moveRight == false)
+            {
+				transform.eulerAngles = new Vector3(0, -180, 0);
+				moveRight = true;
+			}
 
-            if(_controller.isGrounded)
-                _animator.Play(Animator.StringToHash("Run"));
-        } else {
+			if (_controller.isGrounded)
+				_animator.Play(Animator.StringToHash("Run"));
+		}
+		else
+		{
 			normalizedHorizontalSpeed = 0;
 
-            if(_controller.isGrounded)
-                _animator.Play(Animator.StringToHash("Idle"));
-        }
+			if (_controller.isGrounded)
+				_animator.Play(Animator.StringToHash("Idle"));
+		}
 
 
 		// we can only jump whilst grounded
-		if(_controller.isGrounded && Input.GetKeyDown(KeyCode.UpArrow)) {
+		if (_controller.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+		{
 			_velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
 			_animator.Play(Animator.StringToHash("Jump"));
 		}
@@ -104,7 +124,8 @@ public class PlayerMotor : MonoBehaviour {
 
 		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
 		// this lets us jump down through one way platforms
-		if(_controller.isGrounded && Input.GetKey(KeyCode.DownArrow)) {
+		if (_controller.isGrounded && Input.GetKey(KeyCode.DownArrow))
+		{
 			_velocity.y *= 3f;
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 		}
