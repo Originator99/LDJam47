@@ -53,6 +53,10 @@ public class PrinterAI : MonoBehaviour
             bulletsInScene.Add(bullet);
         }
 
+    }
+
+    private void OnEnable() {
+
         StartCoroutine(MoveRight());
         StartCoroutine(DetectPlayer());
         StartCoroutine(DetectGround());
@@ -214,6 +218,7 @@ public class PrinterAI : MonoBehaviour
                 {
                     if (airTravel)
                     {
+                        GameEventSystem.RaiseGameEvent(GAME_EVENT.ENEMY_KILLED, transform);
                         gameObject.SetActive(false);
                     }
                     else

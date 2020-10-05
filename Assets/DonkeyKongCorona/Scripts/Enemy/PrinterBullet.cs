@@ -84,6 +84,7 @@ public class PrinterBullet : MonoBehaviour
             //collision.GetComponent<PlayerController>().health--;
             //collision.GetComponent<PlayerController>().PlayDamageAUdio();
             //Handheld.Vibrate();
+            GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, LEVEL_END_REASON.PLAYER_DEAD);
             explode();
         }
         else if (collision.CompareTag("Wall"))

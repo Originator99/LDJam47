@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class LevelDestructionController : MonoBehaviour {
     public GameObject platformMiniDestroyEffect, platformBigDestroyEffect;
 
     private List<Platform> destroyedPlatforms;
     private List<Platform> destroyedObstacles;
+    private List<Platform> enemiesKilled;
 
     private void Awake() {
         destroyedPlatforms = new List<Platform>();
         destroyedObstacles = new List<Platform>();
+        enemiesKilled = new List<Platform>();
         GameEventSystem.GameEventHandler += HandleGameEvents;
     }
     private void OnDestroy() {
@@ -24,6 +27,9 @@ public class LevelDestructionController : MonoBehaviour {
         }
         if(type == GAME_EVENT.OBSTACLE_DESTROYED && data.GetType() == typeof(Transform)) {
             OnObstacleDestroyed(data as Transform);
+        }
+        if(type == GAME_EVENT.ENEMY_KILLED && data.GetType() == typeof(Transform)) {
+            OnEnemyKilled(data as Transform);
         }
         if(type == GAME_EVENT.REST_LEVEL) {
             ResetLevelDestruction();
@@ -42,6 +48,12 @@ public class LevelDestructionController : MonoBehaviour {
                 obstacle.Reset();
             }
             destroyedObstacles.Clear();
+        }
+        if(enemiesKilled != null) {
+            foreach(var enemy in enemiesKilled) {
+                enemy.Reset();
+            }
+            enemiesKilled.Clear();
         }
     }
 
@@ -62,6 +74,15 @@ public class LevelDestructionController : MonoBehaviour {
 
         Platform obs = new Platform(obstacle);
         destroyedObstacles.Add(obs);
+    }
+
+    private void OnEnemyKilled(Transform enemy) {
+        if(enemiesKilled == null)
+            enemiesKilled = new List<Platform>();
+
+        Platform obs = new Platform(enemy);
+        enemiesKilled.Add(obs);
+
     }
 
     private void DoPlatformDestroyEffect(Transform platform) {
