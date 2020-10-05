@@ -11,7 +11,8 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
 
     private TimeManager manager;
 
-    private GameObject player;
+    private Animator playerAnimator;
+    private float freezeTimer;
 
     private void Awake() {
         GameEventSystem.GameEventHandler += HandleGameEvents;
@@ -19,9 +20,11 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
         if(manager == null) {
             Debug.LogError("Time Manager is null in " + gameObject.name);
         }
-        player = GameObject.FindGameObjectWithTag(GlobalConstants.player_tag);
-        if (player == null)
-        {
+
+        GameObject player = GameObject.FindGameObjectWithTag(GlobalConstants.player_tag);
+        if(player != null) {
+            playerAnimator = player.GetComponent<Animator>();
+        } else {
             Debug.LogError("Player Object is null");
         }
     }
@@ -37,7 +40,12 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
     private void Update() {
         if(Input.GetKeyDown(keycode)) {
             UseCollectable();
-            player.GetComponent<Animator>().Play(Animator.StringToHash("Freeze"));
+        }
+        if(freezeTimer > 0) {
+            freezeTimer -= Time.deltaTime;
+            //if(freezeTimer <= 0) {
+            //    playerAnimator.SetTrigger("Idle");
+            //}
         }
     }
 
@@ -70,6 +78,8 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
         if(ScoreManager.CanUseFreezeTimePowerup()) {
             ScoreManager.OnFreezeTimePowerupUsed();
             if(manager != null) {
+                playerAnimator.SetTrigger("Freeze");
+                freezeTimer = 5f;
                 manager.DoSlowmotion(5f);
             }
             CheckAndSetCollectable();
