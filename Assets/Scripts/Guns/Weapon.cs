@@ -13,27 +13,53 @@ public class Weapon : MonoBehaviour {
     private int facingDirection;
     private float minRotClamp, maxRotClamp;
 
+    float yAngle = 0;
+
     private void Start() {
-        facingDirection = 0;
+        facingDirection = 1;
         minRotClamp = -90;
         maxRotClamp = 90;
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.LeftArrow)) {
-            minRotClamp = 0;
-            maxRotClamp = 180;
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            minRotClamp = 90f;
+            maxRotClamp = 180f;
             facingDirection = -1;
-        } else if(Input.GetKeyDown(KeyCode.RightArrow)) {
+            //yAngle = -180f;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
             minRotClamp = -90f;
-            maxRotClamp = 90;
+            maxRotClamp = 90f;
             facingDirection = 1;
+            //yAngle = 0f;
         }
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotz = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, /*Mathf.Clamp(*/rotz + offset/*, minRotClamp, maxRotClamp)*/);
 
-        if(timeBtwShots <= 0) {
+        float temp = rotz + offset;
+
+        if (facingDirection == -1)
+        {
+            if (temp < -90)
+            {
+                minRotClamp = -180f;
+                maxRotClamp = -90f;
+                transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+            }
+            else
+            {
+                minRotClamp = 90f;
+                maxRotClamp = 180f;
+                transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+            }
+        }
+        else
+            transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+
+        if (timeBtwShots <= 0) {
             if(Input.GetMouseButtonDown(0)) {
                 timeBtwShots = fireRate;
                 Instantiate(projectile, shootPoint.position, transform.rotation);
