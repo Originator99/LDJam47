@@ -66,7 +66,6 @@ public class Scorpion : MonoBehaviour {
 
         if(!isShooting) {
             Vector2 target = GetMovePoint();
-                Debug.Log(Vector2.Distance(actualScorpion.position, target));
             if(Vector2.Distance(actualScorpion.position, target) <= 1.5f) {
                 FlipCharacter();
             }
@@ -111,7 +110,7 @@ public class Scorpion : MonoBehaviour {
         return Vector2.left;
     }
 
-    private void OnDead() {
+    public void OnDead() {
         GameEventSystem.RaiseGameEvent(GAME_EVENT.ENEMY_KILLED, transform);
         gameObject.SetActive(false);
     }

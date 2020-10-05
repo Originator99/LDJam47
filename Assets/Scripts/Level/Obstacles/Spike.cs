@@ -46,9 +46,4 @@ public class Spike : MonoBehaviour {
             onGround = true;
         }
     }
-
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-       
-    }
 }
