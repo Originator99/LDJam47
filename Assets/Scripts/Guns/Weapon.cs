@@ -65,12 +65,12 @@ public class Weapon : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
 
         if (timeBtwShots <= 0) {
-            if(Input.GetMouseButtonDown(0)) {
+            if(Input.GetMouseButtonDown(0) && !GameRunTimeHelper.GameOver) {
                 timeBtwShots = fireRate;
                 Instantiate(projectile, shootPoint.position, transform.rotation);
 
                 //StartCoroutine(cameraShake.Shake(.15f, .4f));
-                EZCameraShake.CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+                //EZCameraShake.CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             }
         } else {
             timeBtwShots -= Time.unscaledDeltaTime;
