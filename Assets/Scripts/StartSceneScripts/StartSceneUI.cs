@@ -9,7 +9,7 @@ public class StartSceneUI : MonoBehaviour {
     private void Start() {
         startButton.onClick.RemoveAllListeners();
         startButton.onClick.AddListener(delegate() {
-            Loader.Load(SceneName.LEVEL_1_1);
+            Loader.Load(SceneName.LEVEL_Test_1_1);
         });
     }
 }

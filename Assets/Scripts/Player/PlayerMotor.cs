@@ -51,6 +51,10 @@ public class PlayerMotor : MonoBehaviour {
 
 	void onTriggerEnterEvent(Collider2D col) {
 		Debug.Log("onTriggerEnterEvent: " + col.gameObject.name);
+        if (col.CompareTag("EnemyBullet"))
+        {
+			Debug.Log("PLAYER HIT!!!!");
+        }
 	}
 
 

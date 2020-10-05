@@ -8,6 +8,7 @@ TagManager:
   - destructible_id_1
   - destructible_id_2
   - EnemyShield
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
