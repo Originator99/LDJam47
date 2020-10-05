@@ -11,11 +11,18 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
 
     private TimeManager manager;
 
+    private GameObject player;
+
     private void Awake() {
         GameEventSystem.GameEventHandler += HandleGameEvents;
         manager = FindObjectOfType<TimeManager>();
         if(manager == null) {
             Debug.LogError("Time Manager is null in " + gameObject.name);
+        }
+        player = GameObject.FindGameObjectWithTag(GlobalConstants.player_tag);
+        if (player == null)
+        {
+            Debug.LogError("Player Object is null");
         }
     }
 
@@ -30,6 +37,7 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
     private void Update() {
         if(Input.GetKeyDown(keycode)) {
             UseCollectable();
+            player.GetComponent<Animator>().Play(Animator.StringToHash("Freeze"));
         }
     }
 
