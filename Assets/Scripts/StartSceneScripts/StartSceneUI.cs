@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class StartSceneUI : MonoBehaviour {
     public Button startButton;
+    public Button controlsButton;
+    public Controls controls;
 
     private void Start() {
         startButton.onClick.RemoveAllListeners();
         startButton.onClick.AddListener(delegate() {
             Loader.Load(SceneName.LEVEL_1_1);
+        });
+        controlsButton.onClick.RemoveAllListeners();
+        controlsButton.onClick.AddListener(delegate () {
+            controls.Show();
         });
     }
 }
