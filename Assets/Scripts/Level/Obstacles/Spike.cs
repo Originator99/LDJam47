@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Spike : MonoBehaviour {
@@ -11,6 +12,11 @@ public class Spike : MonoBehaviour {
     private const string PLATFORM_TAG = "destructible";
     private bool eventSent;
     private bool onGround;
+
+    private Vector2 ogPos;
+    private void Awake() {
+        ogPos = transform.position;
+    }
 
     private void Start() {
         onGround = false;
@@ -31,6 +37,15 @@ public class Spike : MonoBehaviour {
                 GameEventSystem.RaiseGameEvent(GAME_EVENT.OBSTACLE_DESTROYED, transform);
                 rb.gravityScale = 1;
             }
+        }
+        Vector2 offset = (Vector2)transform.position - ogPos;
+        Debug.Log(offset);
+        if(offset.y > 1f) {
+            onGround = true;
+        } else if(offset.y < -1f) {
+            onGround = true;
+        } else {
+            onGround = false;
         }
     }
 
