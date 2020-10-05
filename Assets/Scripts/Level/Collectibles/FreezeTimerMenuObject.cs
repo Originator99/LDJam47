@@ -38,6 +38,9 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
     }
 
     private void HandleGameEvents(GAME_EVENT type, System.Object data = null) {
+        if(type == GAME_EVENT.LEVEL_START) {
+            CheckAndSetCollectable();
+        }
         if(type == GAME_EVENT.POWER_UP_COLLECTED && data != null && data.GetType() == typeof(CollectableType)) {
             if((CollectableType)data == CollectableType.FREEZE_TIME) {
                 ScoreManager.OnFreezeTimeCollected();

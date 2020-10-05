@@ -70,6 +70,9 @@ public class PlayerMotor : MonoBehaviour {
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+		if(GameRunTimeHelper.GameOver)
+			return;
+
 		if (_controller.isGrounded)
 			_velocity.y = 0;
 

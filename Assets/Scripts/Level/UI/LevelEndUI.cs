@@ -32,7 +32,7 @@ public class LevelEndUI : MonoBehaviour {
         int time = 0;
         var levelData = LevelController.instance.levelData;
         foreach(var data in levelData) {
-            time += (data.levelTimer - data.currentTimer);
+            time += (data.levelTimer - (data.levelTimer + data.currentTimer));
         }
         float minutes = Mathf.Floor(time / 60);
         float seconds = Mathf.RoundToInt(time % 60);
@@ -43,7 +43,7 @@ public class LevelEndUI : MonoBehaviour {
         retryButtonText.text = reason == LEVEL_END_REASON.OBJECTIVE_COLLECTED ? "Replay" : "Retry";
         retryButton.onClick.RemoveAllListeners();
         retryButton.onClick.AddListener(delegate {
-            GameEventSystem.RaiseGameEvent(GAME_EVENT.REST_LEVEL);
+            LevelController.instance.RestartLevel();
             HideEndScreen();
         });
         mainscreenButton.onClick.RemoveAllListeners();

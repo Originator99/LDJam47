@@ -23,11 +23,7 @@ public class LevelController : MonoBehaviour {
 
             SceneManager.sceneLoaded += HandleSceneLoad;
             GameEventSystem.GameEventHandler += HandleGameEvents;
-            ResetCurrentTimers();
-            ScoreManager.Init();
-            currentLevelSO = null;
-            GenerateDiamond();
-            StartLevel();
+            HandleDefaults();
         }
     }
 
@@ -63,6 +59,14 @@ public class LevelController : MonoBehaviour {
         }
     }
 
+    private void HandleDefaults() {
+        ResetCurrentTimers();
+        ScoreManager.Init();
+        currentLevelSO = null;
+        GenerateDiamond();
+        StartLevel();
+    }
+
     private void ResetCurrentTimers() {
         if(levelData != null && levelData.Count > 0) {
             foreach(var data in levelData) {
@@ -77,7 +81,11 @@ public class LevelController : MonoBehaviour {
     private void StartLevel() {
         if(levelData != null && levelData.Count > 0) {
             currentLevelSO = levelData[0];
-            GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START, currentLevelSO.levelTimer);
+            if(SceneManager.GetActiveScene().name == currentLevelSO.ID.ToString()) {
+                GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START, currentLevelSO.levelTimer);
+            } else {
+                Loader.Load(currentLevelSO.ID);
+            }
 
         } else {
             Debug.LogError("Level data is null");
@@ -85,16 +93,8 @@ public class LevelController : MonoBehaviour {
     }
 
     public void RestartLevel() {
-        if(levelData != null && levelData.Count > 0) {
-            currentLevelSO = levelData[0];
-            if(SceneManager.GetActiveScene().name == currentLevelSO.ID.ToString()) {
-                GameEventSystem.RaiseGameEvent(GAME_EVENT.REST_LEVEL);
-            } else {
-                Loader.Load(currentLevelSO.ID);
-            }
-        } else {
-            Debug.LogError("Level data is null");
-        }
+        GameEventSystem.RaiseGameEvent(GAME_EVENT.REST_LEVEL);
+        HandleDefaults();
     }
 
     public void SwitchLevel(SceneName ID) {
