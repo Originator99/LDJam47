@@ -18,6 +18,9 @@ public class BombController : MonoBehaviour {
 
     private void DoBlast() {
         if(destroyEffect != null) {
+            if(EZCameraShake.CameraShaker.Instance != null) {
+                EZCameraShake.CameraShaker.Instance.ShakeOnce(3f, 3f, 0.1f, 1f);
+            }
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
         }
 
