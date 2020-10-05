@@ -172,8 +172,8 @@ public class LevelController : MonoBehaviour {
             chance = 20;
             types.Add(CollectableType.FREEZE_TIME);
         } else if(type == GAME_EVENT.OBSTACLE_DESTROYED) {
-            chance = 100;
-            types.Add(CollectableType.BOMB);
+            chance = 20;
+            types.Add(CollectableType.FREEZE_TIME);
         } else if(type == GAME_EVENT.ENEMY_KILLED) {
             chance  = 100;
             types.Add(CollectableType.BOMB);

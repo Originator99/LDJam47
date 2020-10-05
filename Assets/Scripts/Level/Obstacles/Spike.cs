@@ -15,29 +15,26 @@ public class Spike : MonoBehaviour {
     private void Start() {
         onGround = false;
         eventSent = false;
-        rb.isKinematic = true;
-        collider.isTrigger = true;
+        rb.gravityScale = 0;
     }
 
     private void Update() {
         RaycastHit2D platformRayHitCheck = Physics2D.Raycast(attachPoint.position, Vector2.up, 1f);
         Debug.DrawRay(attachPoint.position, Vector2.up);
         if(platformRayHitCheck.collider != null && platformRayHitCheck.collider.tag.Contains(PLATFORM_TAG)) {
-            rb.isKinematic = true;
+            rb.gravityScale = 0;
             eventSent = false;
             onGround = false;
         } else {
             if(!eventSent) {
                 eventSent = true;
                 GameEventSystem.RaiseGameEvent(GAME_EVENT.OBSTACLE_DESTROYED, transform);
-                rb.isKinematic = false;
-                collider.isTrigger = false;
+                rb.gravityScale = 1;
             }
         }
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if(!onGround) {
             if(collision.gameObject != null && collision.gameObject.CompareTag(GlobalConstants.player_tag)) {
                 Debug.Log("Player dead");
@@ -48,5 +45,10 @@ public class Spike : MonoBehaviour {
         if(collision.gameObject != null && collision.gameObject.layer == 8) {
             onGround = true;
         }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+       
     }
 }
