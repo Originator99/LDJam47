@@ -33,6 +33,7 @@ public class LevelDestructionController : MonoBehaviour {
         }
         if(type == GAME_EVENT.REST_LEVEL) {
             ResetLevelDestruction();
+            FindObjectOfType<PlayerMotor>().transform.position = FindObjectOfType<PlayerMotor>().startPos;
         }
     }
 
