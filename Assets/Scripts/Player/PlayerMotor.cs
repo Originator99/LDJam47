@@ -106,12 +106,6 @@ public class PlayerMotor : MonoBehaviour {
 				_animator.Play(Animator.StringToHash("Idle"));
 		}
 
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-			FindObjectOfType<TimeManager>().DoSlowmotion();
-        }
-
 		// we can only jump whilst grounded
 		if (_controller.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
 		{

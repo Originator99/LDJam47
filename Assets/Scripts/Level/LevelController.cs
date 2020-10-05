@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,10 @@ public class LevelController : MonoBehaviour {
     public List<LevelSO> levelData;
 
     public LevelSO currentLevelSO;
+
+    [Header("Power ups")]
+    public GameObject freezeTimePrefab;
+    public GameObject bombPrefab;
 
     private void Awake() {
         if(instance != null) {
@@ -134,14 +139,18 @@ public class LevelController : MonoBehaviour {
     private void OnPlatformDestroyed(Transform obj) {
         ScoreManager.OnPlatformDestroyed();
         UpdateForDiamond(obj);
+        CheckCollectableDrop(obj, GAME_EVENT.PLATFORM_DESTROYED);
     }
     private void OnObstacleDestroyed(Transform obj) {
         ScoreManager.OnObstaclesDestroyed();
         UpdateForDiamond(obj);
+        CheckCollectableDrop(obj, GAME_EVENT.OBSTACLE_DESTROYED);
+
     }
     private void OnEnemyKilled(Transform obj) {
         ScoreManager.OnEnemiesKilled();
         UpdateForDiamond(obj);
+        CheckCollectableDrop(obj, GAME_EVENT.ENEMY_KILLED);
     }
 
     private void UpdateForDiamond(Transform obj) {
@@ -153,5 +162,48 @@ public class LevelController : MonoBehaviour {
         Debug.Log("platforms : " + ScoreManager.GetPlatformsDestroyed() + " obstacles : " + ScoreManager.GetObstaclesDestroyed() + " enemies : " + ScoreManager.GetEnemiesKilled() + " scene : " + sceneToPutDiamond);
     }
 
+    #endregion
+
+    #region Collectables Logic
+    private void CheckCollectableDrop(Transform objectDestroyed, GAME_EVENT type) {
+        int chance = 0;
+        List<CollectableType> types = new List<CollectableType>();
+        if(type == GAME_EVENT.PLATFORM_DESTROYED) {
+            chance = 20;
+            types.Add(CollectableType.FREEZE_TIME);
+        } else if(type == GAME_EVENT.OBSTACLE_DESTROYED) {
+            chance = 20;
+            types.Add(CollectableType.FREEZE_TIME);
+        } else if(type == GAME_EVENT.ENEMY_KILLED) {
+            chance  = 100;
+            types.Add(CollectableType.BOMB);
+        }
+
+        int temp = Random.Range(1, 101);
+        if(temp <= chance) {
+            if(types != null && types.Count > 0) {
+                int index = Random.Range(0, types.Count);
+                if(types.Count > index) {
+                    SpawnPowerup(objectDestroyed, types[index]);
+                } else {
+                    Debug.LogError("Types enum array has invalid count and index range");
+                }
+            } else {
+                Debug.LogError("Types enum array is null");
+            }
+        }
+    }
+
+    private void SpawnPowerup(Transform parent, CollectableType type) {
+        if(parent != null) {
+            GameObject go = null;
+            if(type == CollectableType.FREEZE_TIME && freezeTimePrefab != null) {
+                go = Instantiate(freezeTimePrefab, parent.position, Quaternion.identity);
+            } else if(type == CollectableType.BOMB && bombPrefab != null) {  
+                go = Instantiate(bombPrefab, parent.position, Quaternion.identity);
+            }
+            go.SetActive(true);
+        }
+    }
     #endregion
 }

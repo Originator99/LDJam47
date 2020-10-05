@@ -40,6 +40,14 @@ public static class ScoreManager {
         return enemiesKilledCount;
     }
 
+    public static int GetFreeTimePowerupCount() {
+        return freezeTimePowerupCount;
+    }
+
+    public static int GetBombPowerupCount() {
+        return bombPowerupCount;
+    }
+
     public static bool CanUseFreezeTimePowerup() {
         return freezeTimePowerupCount > 0;
     }
