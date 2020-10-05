@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour {
     public float offset;
     public GameObject projectile;
     public Transform shootPoint;
+    public AudioSource shootSound;
 
     private float timeBtwShots;
     public float fireRate;
@@ -68,9 +69,7 @@ public class Weapon : MonoBehaviour {
             if(Input.GetMouseButtonDown(0) && !GameRunTimeHelper.GameOver) {
                 timeBtwShots = fireRate;
                 Instantiate(projectile, shootPoint.position, transform.rotation);
-
-                //StartCoroutine(cameraShake.Shake(.15f, .4f));
-                //EZCameraShake.CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+                shootSound.Play();
             }
         } else {
             timeBtwShots -= Time.unscaledDeltaTime;

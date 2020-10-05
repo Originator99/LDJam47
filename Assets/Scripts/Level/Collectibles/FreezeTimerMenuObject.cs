@@ -70,7 +70,7 @@ public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
         if(ScoreManager.CanUseFreezeTimePowerup()) {
             ScoreManager.OnFreezeTimePowerupUsed();
             if(manager != null) {
-                manager.DoSlowmotion();
+                manager.DoSlowmotion(5f);
             }
             CheckAndSetCollectable();
         }   

@@ -32,6 +32,9 @@ public class Projectile : MonoBehaviour {
                     DestroyProjectile();
                     
                     if(hitInfo.collider.tag.Contains("destructible")) {
+                        if(EZCameraShake.CameraShaker.Instance != null) {
+                            EZCameraShake.CameraShaker.Instance.ShakeOnce(2f, 2f, 0.1f, 1f);
+                        }
                         GameEventSystem.RaiseGameEvent(GAME_EVENT.PLATFORM_DESTROYED, hitInfo.collider.transform);
                     }
                 }
