@@ -20,7 +20,11 @@ public class PlayerMotor : MonoBehaviour {
 	private Vector3 _velocity;
 
 
+	public Vector2 startPos;
+
 	void Awake() {
+		startPos = transform.position;
+
 		_animator = GetComponent<Animator>();
 		if(_animator == null) {
 			Debug.LogError("_animator is null in " + gameObject.name);
