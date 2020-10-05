@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 976322570801705810}
   - component: {fileID: 6738109514573355568}
   - component: {fileID: -6720404695328668985}
-  - component: {fileID: 2423027867971715973}
+  - component: {fileID: -7472249214201896633}
   m_Layer: 0
   m_Name: PrinterBullet
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,8 +119,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &2423027867971715973
-CapsuleCollider2D:
+--- !u!58 &-7472249214201896633
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -129,9 +129,9 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.27, y: 7.32}
-  m_Direction: 0
+  m_Offset: {x: -0.18, y: 2.15}
+  serializedVersion: 2
+  m_Radius: 1.16

@@ -47,4 +47,5 @@ public enum SceneName {
     LEVEL_1_2,
     LEVEL_1_3,
     LEVEL_1_4,
+    LEVEL_Test_1_1,
 }

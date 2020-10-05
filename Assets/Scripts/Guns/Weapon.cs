@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Weapon : MonoBehaviour {
     public float offset;
@@ -15,7 +16,11 @@ public class Weapon : MonoBehaviour {
 
     float yAngle = 0;
 
+    CameraShake cameraShake;
+
     private void Start() {
+        cameraShake = FindObjectOfType<CameraShake>();
+
         facingDirection = 1;
         minRotClamp = -90;
         maxRotClamp = 90;
@@ -63,6 +68,9 @@ public class Weapon : MonoBehaviour {
             if(Input.GetMouseButtonDown(0)) {
                 timeBtwShots = fireRate;
                 Instantiate(projectile, shootPoint.position, transform.rotation);
+
+                //StartCoroutine(cameraShake.Shake(.15f, .4f));
+                EZCameraShake.CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
             }
         } else {
             timeBtwShots -= Time.unscaledDeltaTime;
