@@ -6,5 +6,6 @@ using UnityEngine;
 public class LevelSO : ScriptableObject {
     public SceneName ID;
     public int levelTimer;
+    public int currentTimer;
     public Sprite portalSprite;
 }

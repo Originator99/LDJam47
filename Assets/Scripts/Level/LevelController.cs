@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour {
 
             SceneManager.sceneLoaded += HandleSceneLoad;
             GameEventSystem.GameEventHandler += HandleGameEvents;
+            ResetCurrentTimers();
             currentLevelSO = null;
             GenerateDiamond();
             StartLevel();
@@ -35,7 +36,11 @@ public class LevelController : MonoBehaviour {
             instance = null;
         } else if(scene.name != SceneName.Loader.ToString()) {
             if(currentLevelSO != null) {
-                GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START, currentLevelSO.levelTimer);
+                float timer = currentLevelSO.levelTimer;
+                if(currentLevelSO.currentTimer > 0) {
+                    timer = currentLevelSO.currentTimer;
+                }
+                GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START, timer);
             }
         }
     }
@@ -49,6 +54,17 @@ public class LevelController : MonoBehaviour {
         }
         if(type == GAME_EVENT.ENEMY_KILLED) {
             OnEnemyKilled(data as Transform);
+        }
+    }
+
+    private void ResetCurrentTimers() {
+        if(levelData != null && levelData.Count > 0) {
+            foreach(var data in levelData) {
+                data.currentTimer = 0;
+            }
+
+        } else {
+            Debug.LogError("Level data is null");
         }
     }
 
@@ -77,6 +93,7 @@ public class LevelController : MonoBehaviour {
 
     public void SwitchLevel(SceneName ID) {
         if(currentLevelSO.ID != ID) {
+            currentLevelSO.currentTimer = (int)GameRunTimeHelper.CurrentTimer;
             currentLevelSO = levelData.Find(x => x.ID == ID);
             if(currentLevelSO != null) {
                 Loader.Load(currentLevelSO.ID);
