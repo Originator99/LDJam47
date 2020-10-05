@@ -19,6 +19,7 @@ public class LevelController : MonoBehaviour {
             SceneManager.sceneLoaded += HandleSceneLoad;
             GameEventSystem.GameEventHandler += HandleGameEvents;
             ResetCurrentTimers();
+            ScoreManager.Init();
             currentLevelSO = null;
             GenerateDiamond();
             StartLevel();
@@ -113,7 +114,7 @@ public class LevelController : MonoBehaviour {
     public int minEnemiesToKill, maxEnemiesToKill;
 
     private float platforms, obstacles, enemies;
-    private float currentPlatforms, currentObstacles, currentEnemies;
+
 
     private string sceneToPutDiamond;
     private bool diamondInstantiated;
@@ -124,10 +125,6 @@ public class LevelController : MonoBehaviour {
         obstacles = Random.Range(minObstaclesToDestroy, maxObstaclesToDestroy);
         enemies = Random.Range(minEnemiesToKill, maxEnemiesToKill);
 
-        currentPlatforms = 0;
-        currentObstacles = 0;
-        currentEnemies = 0;
-
         int n = Random.Range(0, levelData.Count);
         sceneToPutDiamond = levelData[n].ID.ToString();
 
@@ -135,29 +132,25 @@ public class LevelController : MonoBehaviour {
     }
 
     private void OnPlatformDestroyed(Transform obj) {
-        if(currentPlatforms < platforms) {
-            currentPlatforms++;
-        }
+        ScoreManager.OnPlatformDestroyed();
         UpdateForDiamond(obj);
     }
     private void OnObstacleDestroyed(Transform obj) {
-        if(currentObstacles < obstacles) {
-            currentObstacles++;
-        }
+        ScoreManager.OnObstaclesDestroyed();
         UpdateForDiamond(obj);
     }
     private void OnEnemyKilled(Transform obj) {
-        if(currentEnemies < enemies) {
-            currentEnemies++;
-        }
+        ScoreManager.OnEnemiesKilled();
         UpdateForDiamond(obj);
     }
 
     private void UpdateForDiamond(Transform obj) {
-        if(currentEnemies == enemies && currentObstacles == obstacles && currentPlatforms == platforms && SceneManager.GetActiveScene().name == sceneToPutDiamond && !diamondInstantiated) {
+        if(ScoreManager.GetEnemiesKilled() >= enemies && ScoreManager.GetObstaclesDestroyed() >= obstacles && ScoreManager.GetPlatformsDestroyed() >= platforms && SceneManager.GetActiveScene().name == sceneToPutDiamond && !diamondInstantiated) {
             diamondInstantiated = true;
             Instantiate(diamondPrefab, obj.position, Quaternion.identity);
         }
+        
+        Debug.Log("platforms : " + ScoreManager.GetPlatformsDestroyed() + " obstacles : " + ScoreManager.GetObstaclesDestroyed() + " enemies : " + ScoreManager.GetEnemiesKilled() + " scene : " + sceneToPutDiamond);
     }
 
     #endregion
