@@ -39,7 +39,7 @@ public class Spike : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(!onGround) {
-            if(collision.gameObject != null && collision.gameObject.CompareTag("Player")) {
+            if(collision.gameObject != null && collision.gameObject.CompareTag(GlobalConstants.player_tag)) {
                 Debug.Log("Player dead");
                 GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, LEVEL_END_REASON.PLAYER_DEAD);
             }

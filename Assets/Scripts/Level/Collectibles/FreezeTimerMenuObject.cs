@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FreezeTimer : MonoBehaviour , ICollectable {
+public class FreezeTimerMenuObject : MonoBehaviour , ICollectable {
     public Button button;
     public Text count;
 

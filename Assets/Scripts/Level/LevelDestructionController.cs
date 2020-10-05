@@ -65,9 +65,9 @@ public class LevelDestructionController : MonoBehaviour {
     }
 
     private void DoPlatformDestroyEffect(Transform platform) {
-        if(platform.CompareTag("destructible_id_2") && platformMiniDestroyEffect != null) {
+        if(platform.CompareTag(GlobalConstants.platform_one_way_tag) && platformMiniDestroyEffect != null) {
             Instantiate(platformMiniDestroyEffect, platform.position, platform.rotation);
-        } else if(platform.CompareTag("destructible_id_1") && platformBigDestroyEffect != null) {
+        } else if(platform.CompareTag(GlobalConstants.platform_big_tag) && platformBigDestroyEffect != null) {
             Instantiate(platformBigDestroyEffect, platform.position, platform.rotation);
         }
     }

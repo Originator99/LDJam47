@@ -69,7 +69,7 @@ public class PrinterBullet : MonoBehaviour
 
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
-    //    if (collision.collider.CompareTag("Player"))
+    //    if (collision.collider.CompareTag(GlobalConstants.player_tag))
     //    {
     //        //collision.collider.GetComponent<PlayerController>().health--;
 
@@ -79,7 +79,7 @@ public class PrinterBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag(GlobalConstants.player_tag))
         {
             //collision.GetComponent<PlayerController>().health--;
             //collision.GetComponent<PlayerController>().PlayDamageAUdio();

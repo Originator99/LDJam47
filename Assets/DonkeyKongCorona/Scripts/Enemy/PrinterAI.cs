@@ -168,7 +168,7 @@ public class PrinterAI : MonoBehaviour
                 {
                     PlayerNotDetected();
                 }
-                else if (hitInfo.collider.CompareTag("Player"))
+                else if (hitInfo.collider.CompareTag(GlobalConstants.player_tag))
                 {
                     Debug.DrawLine(transform.position, hitInfo.point, Color.yellow);
                     if (!sittingIdle)

@@ -407,6 +407,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 995ade26a25bc9946a04e7449a9cf33f, type: 2}
   - {fileID: 11400000, guid: aec0f5017281d164da32e9588bd6f029, type: 2}
   currentLevelSO: {fileID: 0}
+  freezeTimePrefab: {fileID: 0}
+  bombPrefab: {fileID: 0}
+  diamondPrefab: {fileID: 0}
+  minPlatformsToDestroy: 0
+  maxPlatformsToDestroy: 0
+  minObstaclesToDestroy: 0
+  maxObstaclesToDestroy: 0
+  minEnemiesToKill: 0
+  maxEnemiesToKill: 0
 --- !u!4 &80424451
 Transform:
   m_ObjectHideFlags: 0
@@ -1533,6 +1542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 269696750}
+  collider: {fileID: 0}
   attachPoint: {fileID: 530916876}
   groundLayerMask:
     serializedVersion: 2
