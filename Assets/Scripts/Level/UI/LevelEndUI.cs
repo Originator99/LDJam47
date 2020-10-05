@@ -9,9 +9,12 @@ public class LevelEndUI : MonoBehaviour {
     public Text retryButtonText;
     public Text platformsDestroyed, obstaclesDestroyed, enemiesKilled, timeTaken;
 
+    public AudioSource endSoundClip;
+
     public void ShowEndScreen(LEVEL_END_REASON reason) {
         RenderData(reason);
         gameObject.SetActive(true);
+        endSoundClip.Play();
     }
 
     public void HideEndScreen() {

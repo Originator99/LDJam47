@@ -169,7 +169,7 @@ public class LevelController : MonoBehaviour {
         int chance = 0;
         List<CollectableType> types = new List<CollectableType>();
         if(type == GAME_EVENT.PLATFORM_DESTROYED) {
-            chance = 7;
+            chance = 170;
             types.Add(CollectableType.FREEZE_TIME);
         } else if(type == GAME_EVENT.OBSTACLE_DESTROYED) {
             chance = 10;

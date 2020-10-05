@@ -76,7 +76,7 @@ public class PlayerMotor : MonoBehaviour {
 		if (_controller.isGrounded)
 			_velocity.y = 0;
 
-		if (Input.GetKey(KeyCode.RightArrow))
+		if (Input.GetKey(KeyCode.D))
 		{
 			normalizedHorizontalSpeed = 1;
 			//if(transform.localScale.x < 0f)
@@ -90,7 +90,7 @@ public class PlayerMotor : MonoBehaviour {
 			if (_controller.isGrounded)
 				_animator.Play(Animator.StringToHash("Run"));
 		}
-		else if (Input.GetKey(KeyCode.LeftArrow))
+		else if (Input.GetKey(KeyCode.A))
 		{
 			moveRight = false;
 			normalizedHorizontalSpeed = -1;
@@ -114,7 +114,7 @@ public class PlayerMotor : MonoBehaviour {
 		}
 
 		// we can only jump whilst grounded
-		if (_controller.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+		if (_controller.isGrounded && Input.GetKeyDown(KeyCode.W))
 		{
 			_velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
 			_animator.Play(Animator.StringToHash("Jump"));

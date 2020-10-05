@@ -28,44 +28,45 @@ public class Weapon : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            minRotClamp = 90f;
-            maxRotClamp = 180f;
-            facingDirection = -1;
-            //yAngle = -180f;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            minRotClamp = -90f;
-            maxRotClamp = 90f;
-            facingDirection = 1;
-            //yAngle = 0f;
-        }
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotz = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, yAngle, rotz + offset);
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    minRotClamp = 90f;
+        //    maxRotClamp = 180f;
+        //    facingDirection = -1;
+        //    //yAngle = -180f;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    minRotClamp = -90f;
+        //    maxRotClamp = 90f;
+        //    facingDirection = 1;
+        //    //yAngle = 0f;
+        //}
 
-        float temp = rotz + offset;
+        //float temp = rotz + offset;
 
-        if (facingDirection == -1)
-        {
-            if (temp < -90)
-            {
-                minRotClamp = -180f;
-                maxRotClamp = -90f;
-                transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
-            }
-            else
-            {
-                minRotClamp = 90f;
-                maxRotClamp = 180f;
-                transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
-            }
-        }
-        else
-            transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+        //if (facingDirection == -1)
+        //{
+        //    if (temp < -90)
+        //    {
+        //        minRotClamp = -180f;
+        //        maxRotClamp = -90f;
+        //        transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+        //    }
+        //    else
+        //    {
+        //        minRotClamp = 90f;
+        //        maxRotClamp = 180f;
+        //        transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
+        //    }
+        //}
+        //else
+        //    transform.rotation = Quaternion.Euler(0f, yAngle, Mathf.Clamp(rotz + offset, minRotClamp, maxRotClamp));
 
-        if (timeBtwShots <= 0) {
+        if(timeBtwShots <= 0) {
             if(Input.GetMouseButtonDown(0) && !GameRunTimeHelper.GameOver) {
                 timeBtwShots = fireRate;
                 Instantiate(projectile, shootPoint.position, transform.rotation);
