@@ -36,15 +36,19 @@ public class PrinterAI : MonoBehaviour
 
     bool startFiring = false;
 
+    [SerializeField]
+    GameObject bulletSpawnPoint;
+
     private void Start()
     {
 
         Physics2D.queriesStartInColliders = false;
         bulletsInScene = new List<GameObject>();
+        bulletSpawnPoint = transform.GetChild(0).gameObject;
 
         for (int i = 0; i < 10; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position/*transform.position*/, Quaternion.identity);
             bullet.SetActive(false);
             bulletsInScene.Add(bullet);
         }
@@ -100,7 +104,7 @@ public class PrinterAI : MonoBehaviour
             if (!bulletsInScene[i].activeInHierarchy)
             {
                 GetComponent<AudioSource>().Play();
-                bulletsInScene[i].transform.position = transform.position;
+                bulletsInScene[i].transform.position = bulletSpawnPoint.transform.position;
                 bulletsInScene[i].transform.rotation = transform.rotation;
                 bulletsInScene[i].SetActive(true);
                 Rigidbody2D tempRigidbody2D = bulletsInScene[i].GetComponent<Rigidbody2D>();

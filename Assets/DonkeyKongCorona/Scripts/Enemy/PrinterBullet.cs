@@ -32,7 +32,8 @@ public class PrinterBullet : MonoBehaviour
     {
         while (true)
         {
-            transform.RotateAround(transform.position, transform.forward, roateSpeed* Time.deltaTime * 90f);
+            //transform.RotateAround(transform.position, transform.forward, roateSpeed* Time.deltaTime * 90f);
+            transform.eulerAngles = new Vector3(0, 0, 88);
             yield return null;
         }
     }
@@ -57,7 +58,7 @@ public class PrinterBullet : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(true);
         }
         GetComponent<SpriteRenderer>().enabled = false;
-        Invoke("hideBullet", 0.25f);
+        Invoke("hideBullet", 0.01f);
     }
 
     private void OnDisable()

@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour {
             }
         }
 
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * Time.unscaledDeltaTime);
 
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, Time.deltaTime*speed+.1f, collisionMask);
         //if (hit.collider != null)
