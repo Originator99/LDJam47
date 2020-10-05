@@ -18,6 +18,10 @@ public class Spike : MonoBehaviour {
         ogPos = transform.position;
     }
 
+    private void OnEnable() {
+        ogPos = transform.position;
+    }
+
     private void Start() {
         onGround = false;
         eventSent = false;

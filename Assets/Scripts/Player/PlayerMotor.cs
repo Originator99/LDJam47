@@ -118,7 +118,7 @@ public class PlayerMotor : MonoBehaviour {
 		}
 
 		// we can only jump whilst grounded
-		if (_controller.isGrounded && Input.GetKeyDown(KeyCode.W))
+		if (_controller.isGrounded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)))
 		{
 			_velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
 			_animator.Play(Animator.StringToHash("Jump"));
