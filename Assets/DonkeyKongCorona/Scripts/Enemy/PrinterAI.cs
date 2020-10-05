@@ -206,7 +206,7 @@ public class PrinterAI : MonoBehaviour
     {
         while (true)
         {
-            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up * -1, 1, layerMask);
+            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up * -1, 5, layerMask);
             if (hitInfo.collider != null)  //error
             {
                 Debug.DrawLine(transform.position, hitInfo.point, Color.green);
